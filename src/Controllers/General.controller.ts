@@ -1,9 +1,16 @@
+import { ApiResponse } from './../helper/ApiResponse';
+import { routes } from './../Routes/index';
+import { GeneralService } from './../Services/General.service';
 import { Controller, Get } from '@nestjs/common';
 
-@Controller('testing')
+@Controller(routes.general)
 export class GeneralController {
+
+    constructor (private generalService: GeneralService){}
+
     @Get()
-    getTesting(): string{
-        return 'This is a test of the route';
+    getTesting():Promise<ApiResponse> {
+        return this.generalService.generalMessage()
     }
+    
 }
